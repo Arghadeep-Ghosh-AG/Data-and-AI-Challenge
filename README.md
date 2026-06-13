@@ -319,7 +319,7 @@ The system successfully ranks candidates using semantic understanding and behavi
 
 ## Author
 
-Arghadeep Ghosh
-Suman Mondal
-Dhrubati Sur
+Arghadeep Ghosh|
+Suman Mondal|
+Dhrubati Sur|
 Srijita Dan
