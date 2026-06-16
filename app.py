@@ -19,7 +19,10 @@ jd = st.text_area(
     key="job_description_input"
 )
 
-if st.button("Rank Candidates"):
+if st.button(
+    "Rank Candidates",
+    key="rank_button"
+):
 
     if jd.strip():
 
