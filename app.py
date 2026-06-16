@@ -1,21 +1,21 @@
 import streamlit as st
-
-st.title("AI Candidate Ranking System")
-
-jd = st.text_area("Paste Job Description")
-
-if st.button("Rank Candidates"):
-    st.success("Ranking started!")
-
-    # Later call your ranking pipeline here
-    st.write("Top candidates will appear here.")
-    
 from src.main import rank_candidates_from_jd
 
+st.set_page_config(
+    page_title="AI Candidate Ranking System",
+    page_icon="🎯",
+    layout="wide"
+)
+
 st.title("AI Candidate Ranking System")
+
+st.write(
+    "Paste a Job Description below and rank the best matching candidates."
+)
 
 jd = st.text_area(
     "Paste Job Description",
+    height=200,
     key="job_description_input"
 )
 
@@ -26,15 +26,16 @@ if st.button(
 
     if jd.strip():
 
-        results = rank_candidates_from_jd(
-            jd
-        )
+        with st.spinner("Ranking candidates..."):
 
-        st.subheader(
-            "Top Candidates"
-        )
+            results = rank_candidates_from_jd(jd)
 
-        st.dataframe(results)
+        st.subheader("Top Candidates")
+
+        st.dataframe(
+            results,
+            use_container_width=True
+        )
 
         st.success(
             "Ranking completed successfully!"
@@ -45,4 +46,3 @@ if st.button(
         st.warning(
             "Please enter a Job Description."
         )
-
