@@ -15,7 +15,8 @@ from src.main import rank_candidates_from_jd
 st.title("AI Candidate Ranking System")
 
 jd = st.text_area(
-    "Paste Job Description"
+    "Paste Job Description",
+    key="job_description_input"
 )
 
 if st.button("Rank Candidates"):
