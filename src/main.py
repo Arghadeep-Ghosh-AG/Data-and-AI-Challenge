@@ -11,13 +11,19 @@ def generate_reason(row):
     reasons = []
 
     if row["semantic_score"] > 0.75:
-        reasons.append("Strong semantic match with job description")
+        reasons.append(
+            "Strong semantic match with job description"
+        )
 
     if row["semantic_score"] > 0.70:
-        reasons.append("Relevant skills and experience detected")
+        reasons.append(
+            "Relevant skills and experience detected"
+        )
 
     if not reasons:
-        reasons.append("Moderate fit based on profile information")
+        reasons.append(
+            "Moderate fit based on profile information"
+        )
 
     return "; ".join(reasons)
 
@@ -69,7 +75,7 @@ def rank_candidates_from_jd(jd_text):
         exist_ok=True
     )
 
-    # Save full ranked list
+    # Save top 100 ranked candidates
     ranked[
         [
             "candidate_id",
@@ -77,12 +83,12 @@ def rank_candidates_from_jd(jd_text):
             "rank",
             "reason"
         ]
-    ].to_csv(
+    ].head(100).to_csv(
         "output/submission.csv",
         index=False
     )
 
-    # Return top 10 for Streamlit display
+    # Return top 100 for Streamlit display
     return ranked[
         [
             "candidate_id",
@@ -90,4 +96,4 @@ def rank_candidates_from_jd(jd_text):
             "rank",
             "reason"
         ]
-    ].head(10)
+    ].head(100)
